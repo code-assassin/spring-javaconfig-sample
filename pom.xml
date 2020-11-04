@@ -271,109 +271,27 @@
         </executions>
       </plugin>      
     </plugins>
-  </build>
+  </build> 
+ 
+ <dependencies>
+      <!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.1.0</version>
+      </dependency>
 
-  <!-- Deploy releases and snapshots to the CloudBees maven repositories -->
-  <distributionManagement>
-    <downloadUrl>https://github.com/arey/spring-javaconfig-sample</downloadUrl>
-    <repository>
-      <id>javaetmoi-cloudbees-release</id>
-      <name>javaetmoi-cloudbees-release</name>
-      <url>dav:https://repository-javaetmoi.forge.cloudbees.com/release/</url>
-    </repository>
-    <snapshotRepository>
-      <id>javaetmoi-cloudbees-snapshot</id>
-      <name>javaetmoi-cloudbees-snapshot</name>
-      <url>dav:https://repository-javaetmoi.forge.cloudbees.com/snapshot/</url>
-    </snapshotRepository>
-  </distributionManagement>
-
-  <repositories>
-    <repository>
-      <id>javaetmoi-cloudbees-release</id>
-      <name>javaetmoi-cloudbees-release</name>
-      <url>https://repository-javaetmoi.forge.cloudbees.com/release/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>javaetmoi-cloudbees-snapshot</id>
-      <name>javaetmoi-cloudbees-snapshot</name>
-      <url>https://repository-javaetmoi.forge.cloudbees.com/snapshot/</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
-  <profiles>
-    <profile>
-      <id>eclipse</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <artifactId>maven-eclipse-plugin</artifactId>
-              <version>${version.plugin.maven-eclipse-plugin}</version>
+  </dependencies>
+  <build>
+    <finalName>getting-started-tomcat</finalName>
+      <plugins>
+          <plugin>
+              <artifactId>maven-war-plugin</artifactId>
+              <version>2.6</version>
               <configuration>
-                <wtpversion>2.0</wtpversion>
-                <downloadSources>true</downloadSources>
-                <downloadJavadocs>true</downloadJavadocs>
-                <ajdtVersion>none</ajdtVersion>
-                <useProjectReferences>true</useProjectReferences>
-                <additionalProjectnatures>
-                  <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-                </additionalProjectnatures>
+                  <warName>ROOT</warName>
               </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-    </profile>
-
-    <profile>
-      <!-- Specific profile for release or artifact deployment -->
-      <!-- Sources et javadoc are packaged -->
-      <id>release</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
           </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
+      </plugins>
+  </build>
 </project>
