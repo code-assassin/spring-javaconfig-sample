@@ -192,7 +192,12 @@
       <version>${version.commons-dbcp}</version>
       <scope>runtime</scope>
     </dependency>
-
+      <!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.1.0</version>
+      </dependency>
   </dependencies>
 
   <build>
@@ -205,6 +210,14 @@
     </extensions>
 
     <plugins>
+      
+        <plugin>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+                <warName>ROOT</warName>
+            </configuration>
+        </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -239,49 +252,10 @@
         <artifactId>maven-deploy-plugin </artifactId>
         <version>${version.plugin.maven-deploy-plugin}</version>
       </plugin>
-      
-      <plugin>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>${version.jetty}</version>
-        <configuration>
-          <scanIntervalSeconds>10</scanIntervalSeconds>
-          <stopKey>foo</stopKey>
-          <stopPort>9999</stopPort>
-        </configuration>
-        <executions>
-          <execution>
-            <id>start-jetty</id>
-            <phase>pre-integration-test</phase>
-            <goals>
-              <goal>deploy-war</goal>
-            </goals>
-            <configuration>
-              <scanIntervalSeconds>0</scanIntervalSeconds>
-              <daemon>true</daemon>
-            </configuration>
-          </execution>
-          <execution>
-            <id>stop-jetty</id>
-            <phase>post-integration-test</phase>
-            <goals>
-              <goal>stop</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>      
+         
     </plugins>
-  </build> 
- 
- <dependencies>
-      <!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>3.1.0</version>
-      </dependency>
-
-  </dependencies>
+  </build>  
+  
   <build>
     <finalName>getting-started-tomcat</finalName>
       <plugins>
